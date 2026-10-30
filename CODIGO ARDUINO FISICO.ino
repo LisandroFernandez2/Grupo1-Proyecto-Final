@@ -19,7 +19,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
 LiquidCrystal_I2C lcd(0x27,16,2); 
 //========================= VARIABLES ========================= 
-int Humedad, Temperatura, Luz; 
+int Humedad, Temperatura, Luz, HumedadSuelo; 
 const int midi1[4][3] = { 
   {NOTA_A2, 136, 0}, 
   {NOTA_C3, 136, 0}, 
@@ -56,12 +56,17 @@ void LeerSensores() {
   Humedad = dht.readHumidity();
   // Leemos la temperatura en grados Celsius
   Temperatura = dht.readTemperature();
+  HumedadSuelo = analogRead(SensorDeHumedadPin);
+  //Humedad = map(Humedad,)
   Serial.print("Humedad: ");
   Serial.print(Humedad);
   Serial.print("%\t");
   Serial.print("Temperatura: ");
   Serial.print(Temperatura);
   Serial.println(" *C");
+  Serial.print("Humedad del suelo: ");
+  Serial.print(HumedadSuelo);
+  // maximo 666
   Luz = analogRead(PinLuz); 
   Luz = map(Luz, 194, 1, 0, 100); 
   
@@ -105,8 +110,8 @@ void ControlarLaIluminacion() {
 void MostrarEnLCD() { 
   lcd.setCursor(0, 0); 
   lcd.print("Hum:"); 
-  lcd.print(Humedad); 
-  lcd.print("% Luz:"); 
+  lcd.print(HumedadSuelo); 
+  lcd.print("Luz:"); 
   lcd.print(Luz);
   lcd.print("% ");
   lcd.setCursor(0, 1); 
