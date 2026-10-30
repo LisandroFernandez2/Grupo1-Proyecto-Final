@@ -1,7 +1,6 @@
-#include <Adafruit_LiquidCrystal.h>
+// INSTALAR LAS LIBRERIAS LiquidCrystal I2C Y DHT sensor library
 #include "DHT.h"
 #define SensorDeHumedadPin A2
-#define SensorDeTemperaturaPin A0
 #define PinMotorDeRiego 3 
 #define PinVentilador 5 
 #define PinBuzzer 12 
